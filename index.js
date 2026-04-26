@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // 2. Connect to your local MongoDB
-mongoose.connect('mongodb+srv://cherryrr79:Qwerty79@cluster0.hpaiftt.mongodb.net/liquid3_db/')
+mongoose.connect('mongodb+srv://cherryrr79:Qwerty79@cluster0.hpaiftt.mongodb.net/?appName=Cluster0')
   .then(() => console.log('Connected to MongoDB!'))
   .catch(err => console.error('Failed to connect to MongoDB:', err));
 
