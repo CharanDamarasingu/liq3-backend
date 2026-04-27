@@ -14,12 +14,16 @@ mongoose.connect('mongodb+srv://cherryrr79:Qwerty79@cluster0.hpaiftt.mongodb.net
   .catch(err => console.error('Failed to connect:', err));
 
 // NEW: Added methaneLevel to the blueprint
+// ... [Keep your exact imports and MongoDB connection here] ...
+
+// NEW: Added co2Intake to the schema
 const sensorSchema = new mongoose.Schema({
   temperature: Number,
   humidity: Number,
   irStatus: Number,
   liquidLevel: Number,
   methaneLevel: Number, 
+  co2Intake: Number, // Saving real data!
   timestamp: { type: Date, default: Date.now }
 });
 
@@ -32,7 +36,8 @@ app.post('/api/sensors', async (req, res) => {
       humidity: req.body.humidity,
       irStatus: req.body.irStatus,
       liquidLevel: req.body.liquidLevel,
-      methaneLevel: req.body.methaneLevel // Catching MQ-4 data
+      methaneLevel: req.body.methaneLevel,
+      co2Intake: req.body.co2Intake // Catching MQ-2 data
     });
     
     await newReading.save();
@@ -42,6 +47,9 @@ app.post('/api/sensors', async (req, res) => {
     res.status(500).send({ message: "Error saving data" });
   }
 });
+
+// ... [Keep your app.get and app.listen exact code here] ...
+
 
 app.get('/api/data', async (req, res) => {
   try {
